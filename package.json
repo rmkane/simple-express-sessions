@@ -1,5 +1,5 @@
 {
-  "name": "node-login",
+  "name": "simple-express-sessions",
   "version": "1.0.0",
   "type": "module",
   "main": "index.js",
