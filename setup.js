@@ -1,15 +1,14 @@
 import {
   createDatabaseFromSql,
-  executeQuery,
+  openDatabase,
 } from "./src/app/js/query-utils.js";
 
 console.log("CREATE database");
-await createDatabaseFromSql("auth", "./data/setup.sql", false);
+createDatabaseFromSql("auth", "./data/setup.sql", true);
 
 console.log("FETCH test account");
-const row = await executeQuery(
-  "auth",
-  "SELECT * FROM `accounts` where `username` = ?",
-  ["test"]
-);
-console.log(row?.id === 2);
+const db = openDatabase('auth');
+const stmt = db.prepare('SELECT * FROM `accounts` where `username` = ?')
+const result = stmt.get('test');
+console.log(result?.id === 2);
+db.close();
