@@ -4,7 +4,12 @@ import session from "express-session";
 import path from "path";
 import url from "url";
 
-import { executeQuery } from "./query-utils.js";
+import {
+  authRouter,
+  homeRouter,
+  loginRouter,
+  logoutRouter,
+} from "./routes/index.js";
 
 const PORT = 3000;
 
@@ -33,65 +38,10 @@ app.get("/", function (request, response) {
   }
 });
 
-app.post("/auth", function (request, response) {
-  (async () => {
-    console.log(request.body);
-    const { username, password } = request.body;
-    if (username && password) {
-      const query =
-        "SELECT * FROM accounts WHERE username = ? AND password = ?";
-      const row = await executeQuery("auth", query, [username, password]);
-      if (row) {
-        request.session.loggedin = true;
-        request.session.username = username;
-        response.redirect("/home");
-      } else {
-        response.send("Incorrect username and/or password!");
-      }
-      response.end();
-    } else {
-      response.send("Please enter a username and/or password!");
-      response.end();
-    }
-  })();
-});
-
-app.get("/home", function (request, response) {
-  console.log("User is logged in?", request.session.loggedin);
-  if (request.session.loggedin) {
-    response.render(path.join(__dirname, "../pages/home.html"), {
-      username: request.session.username,
-    });
-  } else {
-    response.send('Please <a href="/">log in</a> to view this page!');
-    response.end();
-  }
-});
-
-app.get("/login", function (request, response) {
-  response.sendFile(path.join(__dirname, "../pages/login.html"), (err) => {
-    if (err) {
-      return response.status(err.status).end();
-    } else {
-      return response.status(200).end();
-    }
-  });
-});
-
-app.get("/logout", (request, response) => {
-  if (request.session.loggedin) {
-    request.session.destroy((err) => {
-      if (err) {
-        response.status(400).send("Unable to log out");
-      } else {
-        response.send('Logout successful. <a href="/">Log back in</a>');
-      }
-    });
-  } else {
-    response.send('<a href="/">Log in</a>');
-    res.end();
-  }
-});
+app.use("/auth", authRouter);
+app.use("/home", homeRouter);
+app.use("/login", loginRouter);
+app.use("/logout", logoutRouter);
 
 app.listen(PORT, () => {
   console.log(`[server]: Server is running at http://localhost:${PORT}`);
