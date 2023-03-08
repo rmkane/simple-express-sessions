@@ -8,5 +8,5 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 );
 
 INSERT INTO `accounts` (`username`, `password`, `email`)
-  VALUES ('admin', 'admin', 'admin@admin.com'),
-    ('test', 'test', 'test@test.com');
+  VALUES ('admin', '$2b$10$3007AsiJaMlkhjSVI4iokedqylBaYVxIMMVCpb.zgk0kE3QSsJLwW', 'admin@admin.com'),
+    ('test', '$2b$10$g.xonoayU/mT..hPOMlULeIhqjrLb9G6SB6ta9HsclKS1WbpTvzbi', 'test@test.com');

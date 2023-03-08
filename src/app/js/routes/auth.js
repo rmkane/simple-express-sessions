@@ -1,45 +1,17 @@
 import express from "express";
-import { executeQuery, runQuery } from "../utils/queryUtils.js";
+import {
+  accountExists,
+  createNewAccount,
+  isValidAccount,
+} from "../controllers/auth.js";
 
 const authRouter = express.Router();
 
-const accountExists = (username, password) => {
-  const row = executeQuery(
-    "auth",
-    "SELECT * FROM `accounts` WHERE `username` = ?",
-    [username]
-  );
-  return row != null;
-};
-
-const isValidAccount = (username, password) => {
-  const row = executeQuery(
-    "auth",
-    "SELECT * FROM `accounts` WHERE `username` = ? AND `password` = ?",
-    [username, password]
-  );
-  return row != null;
-};
-
-const createNewAccount = ({ email, password, username }) => {
-  const { lastInsertRowid } = runQuery(
-    "auth",
-    "INSERT INTO `accounts` (`username`, `password`, `email`) VALUES (?, ?, ?)",
-    [username, password, email]
-  );
-  const account = executeQuery(
-    "auth",
-    "SELECT * FROM `accounts` WHERE `id` = ?",
-    [lastInsertRowid]
-  );
-  console.log("New user created:", account);
-};
-
-authRouter.post("/login", function (request, response) {
-  console.log(request.body);
+authRouter.post("/login", async function (request, response) {
   const { password, username } = request.body;
   if (username && password) {
-    if (isValidAccount(username, password)) {
+    const isValid = await isValidAccount(username, password);
+    if (isValid) {
       request.session.loggedin = true;
       request.session.username = username;
       response.redirect("/home");
@@ -53,14 +25,13 @@ authRouter.post("/login", function (request, response) {
   }
 });
 
-authRouter.post("/signup", function (request, response) {
-  console.log(request.body);
+authRouter.post("/signup", async function (request, response) {
   const { email, password, username } = request.body;
   if (email && username && password) {
     if (!accountExists(username)) {
-      createNewAccount({ email, password, username });
+      const account = await createNewAccount({ email, password, username });
       request.session.loggedin = true;
-      request.session.username = username;
+      request.session.username = account.username;
       response.redirect("/home");
     } else {
       response.send("Account already exists!");

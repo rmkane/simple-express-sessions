@@ -1,8 +1,4 @@
 import express from "express";
-import path from "path";
-import url from "url";
-
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 const logoutRouter = express.Router();
 
@@ -17,7 +13,7 @@ logoutRouter.get("/", (request, response) => {
     });
   } else {
     response.send('<a href="/">Log in</a>');
-    res.end();
+    response.end();
   }
 });
 
