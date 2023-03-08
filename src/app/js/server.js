@@ -9,6 +9,7 @@ import {
   homeRouter,
   loginRouter,
   logoutRouter,
+  signupRouter,
 } from "./routes/index.js";
 
 const PORT = 3000;
@@ -42,6 +43,7 @@ app.use("/auth", authRouter);
 app.use("/home", homeRouter);
 app.use("/login", loginRouter);
 app.use("/logout", logoutRouter);
+app.use("/signup", signupRouter);
 
 app.listen(PORT, () => {
   console.log(`[server]: Server is running at http://localhost:${PORT}`);

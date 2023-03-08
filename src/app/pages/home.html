@@ -12,9 +12,15 @@
     <!-- include the stylesheet file -->
     <link href="/style.css" rel="stylesheet" type="text/css" />
   </head>
-  <body>
-    <h1>Home</h1>
-    <h2>Welcome back <%= username %>!</h2>
-    <a href="/logout">Log Out</a>
+  <body class="home">
+    <header>
+      <h1>Website</h1>
+      <a data-action="logout" href="/logout">Log Out</a>
+    </header>
+    <main>
+      <h1>Home</h1>
+      <h2>Welcome back <%= username %>!</h2>
+    </main>
+    <footer>Copyright &copy; 2023 | Website</footer>
   </body>
 </html>

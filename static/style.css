@@ -1,13 +1,23 @@
 * {
   box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen,
     ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial,
     sans-serif;
   font-size: 16px;
-}
-body {
   background-color: #435165;
 }
+
 .login {
   width: 400px;
   background-color: #ffffff;
@@ -36,6 +46,7 @@ body {
   background-color: #3274d6;
   color: #ffffff;
 }
+.login form input[type="email"],
 .login form input[type="password"],
 .login form input[type="text"] {
   width: 310px;
@@ -58,4 +69,40 @@ body {
 .login form input[type="submit"]:hover {
   background-color: #2868c7;
   transition: background-color 0.2s;
+}
+
+.home {
+  display: flex;
+  flex-direction: column;
+}
+
+.home header {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  color: #ffffff;
+}
+
+.home header a[data-action="logout"] {
+  position: absolute;
+  right: 1rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+}
+
+.home main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: #ffffff;
+  padding: 1rem;
+}
+
+.home footer {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  color: #ffffff;
 }

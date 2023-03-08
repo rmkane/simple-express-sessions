@@ -15,6 +15,18 @@ const createDatabaseFromSql = (databaseName, sqlFilename, clean) => {
   db.close();
 };
 
+const runQuery = (databaseName, query, params = []) => {
+  let db = null;
+  try {
+    db = openDatabase(databaseName);
+    return db.prepare(query).run(...params);
+  } finally {
+    if (db) {
+      db.close();
+    }
+  }
+};
+
 const executeQuery = (databaseName, query, params = []) => {
   let db = null;
   try {
@@ -39,4 +51,10 @@ const executeQueryAll = (databaseName, query, params = []) => {
   }
 };
 
-export { createDatabaseFromSql, openDatabase, executeQuery, executeQueryAll };
+export {
+  createDatabaseFromSql,
+  openDatabase,
+  executeQuery,
+  executeQueryAll,
+  runQuery,
+};
