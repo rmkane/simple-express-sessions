@@ -1,3 +1,4 @@
+export { default as accountRouter } from "./account.js";
 export { default as authRouter } from "./auth.js";
 export { default as forgotPasswordRouter } from "./forgotPassword.js";
 export { default as homeRouter } from "./home.js";

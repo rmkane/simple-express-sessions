@@ -3,13 +3,13 @@ import bcrypt from "bcrypt";
 
 const saltRounds = 10;
 
+const fetchAccount = (username) =>
+  executeQuery("auth", "SELECT * FROM `accounts` WHERE `username` = ?", [
+    username,
+  ]);
+
 const accountExists = (username) => {
-  const account = executeQuery(
-    "auth",
-    "SELECT * FROM `accounts` WHERE `username` = ?",
-    [username]
-  );
-  return account != null;
+  return fetchAccount(username) != null;
 };
 
 const isValidAccount = async (username, password) => {
@@ -37,4 +37,4 @@ const createNewAccount = async ({ email, password, username }) => {
   return account;
 };
 
-export { accountExists, createNewAccount, isValidAccount };
+export { accountExists, createNewAccount, fetchAccount, isValidAccount };

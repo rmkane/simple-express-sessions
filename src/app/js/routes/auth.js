@@ -7,7 +7,7 @@ import {
 
 const authRouter = express.Router();
 
-authRouter.post("/login", async function (request, response) {
+authRouter.post("/log-in", async function (request, response) {
   const { password, username } = request.body;
   if (username && password) {
     const isValid = await isValidAccount(username, password);
@@ -25,7 +25,7 @@ authRouter.post("/login", async function (request, response) {
   }
 });
 
-authRouter.post("/signup", async function (request, response) {
+authRouter.post("/sign-up", async function (request, response) {
   const { email, password, username } = request.body;
   if (email && username && password) {
     if (!accountExists(username)) {

@@ -5,13 +5,14 @@ import path from "path";
 import url from "url";
 
 import {
+  accountRouter,
   authRouter,
   forgotPasswordRouter,
   homeRouter,
   logInRouter,
   logOutRouter,
   resetPasswordRouter,
-  signUpRouter
+  signUpRouter,
 } from "./routes/index.js";
 
 const PORT = 3000;
@@ -42,6 +43,7 @@ app.get("/", function (request, response) {
 });
 
 app.use("/auth", authRouter);
+app.use("/account", accountRouter);
 app.use("/home", homeRouter);
 app.use("/log-in", logInRouter);
 app.use("/log-out", logOutRouter);

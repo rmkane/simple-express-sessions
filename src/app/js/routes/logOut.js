@@ -1,4 +1,8 @@
 import express from "express";
+import path from "path";
+import url from "url";
+
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
 const logOutRouter = express.Router();
 
@@ -8,12 +12,20 @@ logOutRouter.get("/", (request, response) => {
       if (err) {
         response.status(400).send("Unable to log out");
       } else {
-        response.send('Logout successful. <a href="/">Log back in</a>');
+        response.sendFile(
+          path.join(__dirname, "../../pages/logged-out.html"),
+          (err) => {
+            if (err) {
+              return response.status(err.status).end();
+            } else {
+              return response.status(200).end();
+            }
+          }
+        );
       }
     });
   } else {
-    response.send('<a href="/">Log in</a>');
-    response.end();
+    response.redirect("/log-in");
   }
 });
 
