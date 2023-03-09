@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1" />
+    <title>Signup</title>
+    <!-- the form awesome library is used to add icons to our form -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    />
+    <!-- include the stylesheet file -->
+    <link href="/style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="flex-container flex-gap-1">
+      <h1>Sign Up</h1>
+      <form class="flex-form flex-gap-1" action="/auth/signup" method="post">
+        <div class="form-control">
+          <label for="username">
+            <i class="fas fa-user"></i>
+          </label>
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            id="username"
+            required
+          />
+        </div>
+        <div class="form-control">
+          <label for="email">
+            <i class="fas fa-envelope"></i>
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            id="email"
+            required
+          />
+        </div>
+        <div class="form-control">
+          <label for="password">
+            <i class="fas fa-lock"></i>
+          </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            id="password"
+            required
+          />
+        </div>
+        <div class="form-control">
+          <label for="password-confirmation">
+            <i class="fas fa-lock"></i>
+          </label>
+          <input
+              type="password"
+              name="password-confirmation"
+              placeholder="Confirm password"
+              id="password-confirmation"
+              required
+          />
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+      <div>
+        <span>Already have an account?</span>
+        <a href="/log-in">Sign In</a>
+      </div>
+    </div>
+  </body>
+</html>

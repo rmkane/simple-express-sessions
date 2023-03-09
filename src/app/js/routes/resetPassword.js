@@ -4,10 +4,10 @@ import url from "url";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-const signupRouter = express.Router();
+const resetPasswordRouter = express.Router();
 
-signupRouter.get("/", (request, response) => {
-  response.sendFile(path.join(__dirname, "../../pages/signup.html"), (err) => {
+resetPasswordRouter.get("/", (request, response) => {
+  response.sendFile(path.join(__dirname, "../../pages/reset-password.html"), (err) => {
     if (err) {
       return response.status(err.status).end();
     } else {
@@ -16,4 +16,4 @@ signupRouter.get("/", (request, response) => {
   });
 });
 
-export default signupRouter;
+export default resetPasswordRouter;

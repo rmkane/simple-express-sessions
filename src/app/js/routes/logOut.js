@@ -1,8 +1,8 @@
 import express from "express";
 
-const logoutRouter = express.Router();
+const logOutRouter = express.Router();
 
-logoutRouter.get("/", (request, response) => {
+logOutRouter.get("/", (request, response) => {
   if (request.session.loggedin) {
     request.session.destroy((err) => {
       if (err) {
@@ -17,4 +17,4 @@ logoutRouter.get("/", (request, response) => {
   }
 });
 
-export default logoutRouter;
+export default logOutRouter;

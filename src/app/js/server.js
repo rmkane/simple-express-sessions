@@ -6,10 +6,12 @@ import url from "url";
 
 import {
   authRouter,
+  forgotPasswordRouter,
   homeRouter,
-  loginRouter,
-  logoutRouter,
-  signupRouter,
+  logInRouter,
+  logOutRouter,
+  resetPasswordRouter,
+  signUpRouter
 } from "./routes/index.js";
 
 const PORT = 3000;
@@ -33,7 +35,7 @@ app.engine("html", ejs.renderFile);
 
 app.get("/", function (request, response) {
   if (!request.session.loggedin) {
-    response.redirect("/login");
+    response.redirect("/log-in");
   } else {
     response.redirect("/home");
   }
@@ -41,9 +43,11 @@ app.get("/", function (request, response) {
 
 app.use("/auth", authRouter);
 app.use("/home", homeRouter);
-app.use("/login", loginRouter);
-app.use("/logout", logoutRouter);
-app.use("/signup", signupRouter);
+app.use("/log-in", logInRouter);
+app.use("/log-out", logOutRouter);
+app.use("/sign-up", signUpRouter);
+app.use("/forgot-password", forgotPasswordRouter);
+app.use("/reset-password", resetPasswordRouter);
 
 app.listen(PORT, () => {
   console.log(`[server]: Server is running at http://localhost:${PORT}`);

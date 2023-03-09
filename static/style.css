@@ -1,3 +1,14 @@
+:root {
+  --background-color: #435165;
+  --background-color-secondary: #191e24;
+  --text-color: #5b6574;
+  --text-color-secondary: #ffffff;
+  --font-size: 16px;
+  --form-control-background: #3274d6;
+  --form-control-background-hover: #2868c7;
+  --form-control-color: #ffffff;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -11,79 +22,97 @@ body {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   font-family: -apple-system, BlinkMacSystemFont, "segoe ui", roboto, oxygen,
     ubuntu, cantarell, "fira sans", "droid sans", "helvetica neue", Arial,
     sans-serif;
-  font-size: 16px;
-  background-color: #435165;
+  font-size: var(--font-size);
+  background-color: var(--background-color);
+  align-items: center;
+  justify-content: center;
 }
 
-.login {
-  width: 400px;
-  background-color: #ffffff;
-  box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
-  margin: 100px auto;
+body > .flex-container > h1 {
+  margin: 0;
+  padding: 0;
+  color: var(--text-color);
+  font-size: 1.5rem;
 }
-.login h1 {
-  text-align: center;
-  color: #5b6574;
-  font-size: 24px;
-  padding: 20px 0 20px 0;
-  border-bottom: 1px solid #dee0e4;
+
+.flex-gap-1 {
+  gap: 1rem;
 }
-.login form {
+
+.flex-gap-2 {
+  gap: 2rem;
+}
+
+.flex-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
-  padding-top: 20px;
+  align-items: center;
+  max-width: 400px;
+  background-color: #ffffff;
+  padding: 1rem;
+  box-shadow: 0 0 9px 0 rgba(0, 0, 0, 0.3);
 }
-.login form label {
+
+.flex-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-control {
+  display: flex;
+}
+
+.form-control label {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50px;
-  height: 50px;
-  background-color: #3274d6;
-  color: #ffffff;
+  width: 3rem;
+  height: 3rem;
+  background-color: var(--form-control-background);
+  color: var(--form-control-color);
 }
-.login form input[type="email"],
-.login form input[type="password"],
-.login form input[type="text"] {
-  width: 310px;
-  height: 50px;
+
+.form-control input[type="email"],
+.form-control input[type="password"],
+.form-control input[type="text"] {
+  width: auto;
+  height: 3rem;
   border: 1px solid #dee0e4;
-  margin-bottom: 20px;
-  padding: 0 15px;
+  padding: 0 1rem;
 }
-.login form input[type="submit"] {
+
+.flex-form button[type="submit"] {
   width: 100%;
-  padding: 15px;
-  margin-top: 20px;
-  background-color: #3274d6;
+  padding: 1rem;
   border: 0;
   cursor: pointer;
   font-weight: bold;
-  color: #ffffff;
-  transition: background-color 0.2s;
+  background-color: var(--form-control-background);
+  color: var(--form-control-color);
 }
-.login form input[type="submit"]:hover {
-  background-color: #2868c7;
+
+.flex-form button[type="submit"]:hover {
+  background-color: var(--form-control-background-hover);
   transition: background-color 0.2s;
 }
 
-.home {
-  display: flex;
-  flex-direction: column;
-}
-
-.home header {
+header {
   position: relative;
   display: flex;
   justify-content: center;
-  color: #ffffff;
+  width: 100%;
+  background: var(--background-color-secondary);
+  color: var(--text-color-secondary);
 }
 
-.home header a[data-action="logout"] {
+header a[data-action="logout"] {
   position: absolute;
   right: 1rem;
   height: 100%;
@@ -92,17 +121,21 @@ body {
   color: #ffffff;
 }
 
-.home main {
+main {
   display: flex;
   flex-direction: column;
   flex: 1;
   background: #ffffff;
   padding: 1rem;
+  min-width: 800px;
+  max-width: 1200px;
 }
 
-.home footer {
+footer {
   display: flex;
   justify-content: center;
+  width: 100%;
   padding: 0.5rem;
-  color: #ffffff;
+  background: var(--background-color-secondary);
+  color: var(--text-color-secondary);
 }
